@@ -11,7 +11,6 @@ LABEL com.redhat.component="jenkins-slave-nodejs-rhel7-docker" \
 
 USER root
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-0.el7_5.x86_64/jre
 ENV PATH /zap:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-0.el7_5.x86_64/jre/bin
 COPY policies /var/lib/jenkins/.ZAP/policies/
 WORKDIR /zap
