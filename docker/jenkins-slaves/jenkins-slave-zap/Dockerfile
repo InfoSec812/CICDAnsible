@@ -21,7 +21,7 @@ RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersio
 
 COPY policies /home/jenkins/.ZAP/policies/
 COPY scripts /home/jenkins/.ZAP/scripts/
-RUN chown root:root /home/jenkins/.ZAP -R; chmod 770 /home/jenkins/.ZAP; chown root:root /zap; chown 770 /zap -R
+RUN chown root:root /home/jenkins -R; chmod 770 /home/jenkins; chown root:root /zap; chown 770 /zap -R
 
 ENV ZAP_PATH /zap/zap.sh
 
