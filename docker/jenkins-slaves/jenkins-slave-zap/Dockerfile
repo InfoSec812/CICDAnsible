@@ -12,10 +12,17 @@ LABEL com.redhat.component="jenkins-slave-zap-rhel7-docker" \
 USER root
 
 ENV PATH /zap:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
-COPY policies /zap/.ZAP/policies/
 WORKDIR /zap
 RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | \
     grep "<url>" | grep ZAP | grep Linux | sed -e 's@^[^>]*>\([^<]*\).*$@\1@g' | xargs -n 1 curl -s -L -o zap.tar.gz && \
     tar --strip-components=1 -xzf zap.tar.gz && \
-    rm -f zap.tar.gz
+    rm -f zap.tar.gz && \
+    touch AcceptedLicense
+
+COPY policies /home/jenkins/.ZAP/policies/
+COPY scripts /home/jenkins/.ZAP/scripts/
+RUN chown root:root /home/jenkins/.ZAP -R; chmod 770 /home/jenkins/.ZAP
+
+ENV ZAP_PATH /zap/zap.sh
+
 USER 1001
